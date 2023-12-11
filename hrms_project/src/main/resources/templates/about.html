@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+
+    <style>
+
+        html {
+            font-size: 10px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            font-family: 'Abril Fatface', serif;
+            flex-direction: row;
+        }
+
+        .section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 3rem; /* Değiştirilmiş değer */
+            position: relative;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .section:nth-child(1) {
+            flex: 1;
+        }
+
+        .section:nth-child(2) {
+            flex: 3;
+        }
+
+        .section img {
+            height: 40rem; /* Değiştirilmiş değer */
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+
+        .section.loaded img {
+            opacity: 1;
+        }
+
+        .section:nth-child(1) {
+            background: #2F395A;
+        }
+
+        .section:nth-child(2) {
+            background: #79af9b;
+            text-align: center;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu a {
+            margin-bottom: 1.25rem; /* Değiştirilmiş değer */
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.3s ease;
+            text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.8); /* Değiştirilmiş değer */
+        }
+
+        .menu a:hover {
+            text-shadow: none;
+            color: #2F395A;
+        }
+
+        p {
+            font-size: 2.3rem;
+            text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.8); /* Değiştirilmiş değer */
+            margin: 1rem 0; /* Değiştirilmiş değer */
+        }
+
+        @media screen and (max-width: 600px) {
+            body {
+                flex-direction: column;
+            }
+
+            .section img {
+                height: 40rem;
+            }
+
+            html {
+                font-size: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="section" id="section1">
+    <img th:src="@{logo.png}" alt="Logo">
+</div>
+<div class="section">
+    <div class="menu">
+        <a href="/index">Main Menu</a>
+        <a href="/login">Log In</a>
+        <a href="/contactus">Contact Us</a>
+        <a href="/information">Information</a>
+        <a href="/about" style="color: #2F395A;text-shadow: none">About</a>
+    </div>
+    <div style="padding: 3rem;"> <!-- Değiştirilmiş değer -->
+        <p>
+            About HRMS
+        <p>Welcome to HRMS, your comprehensive solution for efficient Human Resource Management.</p>
+
+        <p>Our Mission</p>
+        <p>At HRMS, we are dedicated to revolutionizing the way organizations manage their workforce. Our mission is to
+            provide cutting-edge HRMS solutions that streamline processes, optimize performance, and empower businesses
+            to achieve their full potential.</p>
+
+        <p>What We Offer</p>
+        <p>treamlined Workforce Management:
+            Simplify your HR processes with our intuitive and user-friendly platform. From recruitment to employee
+            onboarding, we've got you covered.</p></p>
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        var section1 = document.getElementById('section1');
+        section1.classList.add('loaded');
+    };
+</script>
+</body>
+</html>

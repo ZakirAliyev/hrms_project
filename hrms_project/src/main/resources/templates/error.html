@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+
+    <style>
+
+        html {
+            font-size: 10px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            font-family: 'Abril Fatface', serif;
+            flex-direction: row;
+        }
+
+        .section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 3rem;
+            position: relative;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .section img {
+            height: 40rem;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+
+        .section.loaded img {
+            opacity: 1;
+        }
+
+        .section {
+            background: #ff6347; /* Hata sayfasında kırmızı bir arka plan renk kullanalım */
+        }
+
+        h1 {
+            font-family: Calibri, serif;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu a {
+            margin-bottom: 1.25rem;
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.3s ease;
+            text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.8);
+        }
+
+        .menu a:hover {
+            text-shadow: none;
+            color: #2F395A;
+        }
+
+        p {
+
+            text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.8);
+            margin: 1rem 0;
+        }
+
+        .return-home {
+            margin-top: 2rem;
+            font-family: Calibri, serif;
+            padding: 1rem 2rem;
+            background-color: #2F395A;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .return-home:hover {
+            background-color: #1c2331;
+        }
+
+        @media screen and (max-width: 600px) {
+            body {
+                flex-direction: column;
+            }
+
+            .section img {
+                height: 40rem;
+            }
+
+            html {
+                font-size: 0.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="section" id="section1">
+    <!-- Burada hata sayfasının içeriğini belirleyebilirsiniz -->
+    <h1>Error Page</h1>
+    <p>Sorry, an error occurred. Please try again later.</p>
+    <a href="/index" class="return-home">Return Home Page</a>
+</div>
+
+<script>
+    window.onload = function () {
+        var section1 = document.getElementById('section1');
+        section1.classList.add('loaded');
+    };
+</script>
+</body>
+</html>
