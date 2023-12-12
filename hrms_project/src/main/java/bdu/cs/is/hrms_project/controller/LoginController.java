@@ -10,7 +10,7 @@ public class LoginController {
     @PostMapping("/login/ashr")
     public String loginAsHr(@RequestParam String username, @RequestParam String password) {
         if (username != null && password != null && username.equals("hr") && password.equals("hr")) {
-            return "welcomes/welcomehr";
+            return "/welcomes/welcomehr";
         } else {
             return "/error";
         }

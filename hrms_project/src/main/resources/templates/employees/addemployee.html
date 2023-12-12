@@ -1,10 +1,248 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+
+    <style>
+        html {
+            font-size: 10px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            font-family: 'Abril Fatface', serif;
+            flex-direction: row;
+        }
+
+        .section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 2rem;
+            position: relative;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .section:nth-child(1) {
+            flex: 1;
+        }
+
+        .section:nth-child(2) {
+            flex: 3;
+        }
+
+        .section img {
+            height: 40rem;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+
+        .section.loaded img {
+            opacity: 1;
+        }
+
+        .section:nth-child(1) {
+            background: #2F395A;
+        }
+
+        .section:nth-child(2) {
+            background: #79af9b;
+            text-align: center;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu a {
+            margin-bottom: 1.25rem;
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.3s ease;
+            text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.8);
+        }
+
+        .menu a:hover {
+            text-shadow: none;
+            color: #2F395A;
+        }
+
+        p {
+            text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.8);
+            margin: 1rem 0;
+        }
+
+        .menu button.custom-button {
+            width: 200px;
+            font-size: 20px;
+            font-family: Calibri, serif;
+            font-style: italic;
+            display: block;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #2F395A;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .menu button.custom-button:hover {
+            background-color: #fff;
+            color: #2F395A;
+        }
+
+        /* Style for form container */
+        .section:nth-child(2) {
+            background: #79af9b;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Style for form heading */
+        .section:nth-child(2) h3 {
+            color: #2F395A;
+            font-size: 2rem;
+        }
+
+        /* Style for form labels */
+        label {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-size: 25px;
+            font-family: Calibri, serif;
+            display: block;
+            color: #2F395A;
+        }
+
+        /* Style for form inputs */
+        input {
+            width: 300px;
+            padding: 10px;
+            font-size: 20px;
+            box-sizing: border-box;
+            border: 1px solid transparent;
+            border-radius: 5px;
+        }
+
+        /* Style for submit button */
+        input[type="submit"] {
+            width: auto;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #2F395A;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: 20px;
+        }
+
+        /* Hover effect for submit button */
+        input[type="submit"]:hover {
+            background-color: #fff;
+            color: #2F395A;
+        }
+
+        select {
+            width: 300px;
+            padding: 10px;
+            font-size: 18px;
+            box-sizing: border-box;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #2F395A;
+            cursor: pointer;
+        }
+
+        select:hover {
+            background-color: #f5f5f5;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #6D7993;
+        }
+
+
+        @media screen and (max-width: 600px) {
+            body {
+                flex-direction: column;
+            }
+
+            .section img {
+                height: 40rem;
+            }
+
+            html {
+                font-size: 0.4rem;
+            }
+        }
+    </style>
 </head>
 <body>
-Buradan employeeler add olunacaq
+<div class="section" id="section1">
+    <img th:src="@{../logo.png}" alt="Logo">
+</div>
+<div class="section">
+    <h2 style="color: #2F395A">Add Employee</h2>
+
+    <form action="/employees/addemployee" method="post" th:object="${addEmployee}">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" th:field="*{firstName}" required>
+        <br>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" th:field="*{lastName}" required>
+        <br>
+        <label for="birthday">Birthday:</label>
+        <input type="date" id="birthday" name="birthday" th:field="*{birthday}" required>
+        <br>
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" th:field="*{gender}" required>
+            <option value="MALE" selected>Male</option>
+            <option value="FEMALE">Female</option>
+        </select>
+        <br>
+        <label for="employeeJob">Job Type:</label>
+        <select id="employeeJob" name="employeeJob" th:field="*{employeeJob}" required>
+            <option value="SOFTWARE_ENGINEER" selected>Software Engineer</option>
+            <option value="DATA_ANALYST">Data Analyst</option>
+            <option value="MARKETING_SPECIALIST">Marketing Specialist</option>
+        </select>
+        <br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" th:field="*{username}" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password" th:field="*{password}" required>
+        <br>
+        <input type="submit" value="Submit Form">
+    </form>
+</div>
+
+<script>
+    window.onload = function () {
+        var section1 = document.getElementById('section1');
+        section1.classList.add('loaded');
+    };
+</script>
 </body>
 </html>

@@ -65,10 +65,6 @@ public class HtmlController {
         return "loginas/asemployee";
     }
 
-    @GetMapping("/employees/addemployee")
-    public String showAddEmployeePage() {
-        return "/employees/addemployee";
-    }
 
     @GetMapping("/employees/updateemployee")
     public String showUpdateEmployeePage() {
