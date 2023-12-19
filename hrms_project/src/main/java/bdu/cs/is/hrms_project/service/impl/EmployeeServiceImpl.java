@@ -20,7 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void addEmployee(Employee employee) {
+    public void create_employee(Employee employee) {
         employeeRepository.save(employee);
     }
 
@@ -30,12 +30,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmployee(Long employeeId) {
+    public void delete_employee(Long employeeId) {
         employeeRepository.deleteById(employeeId);
     }
 
     @Override
     public Employee getEmployeeById(Long employeeId) {
         return employeeRepository.findById(employeeId).orElse(null);
+    }
+
+    @Override
+    public Employee findByUsernameAndPassword(String username, String password) {
+        return employeeRepository.findByUsernameAndPassword(username, password);
     }
 }

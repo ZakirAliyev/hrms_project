@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+
+    <style>
+
+        html {
+            font-size: 10px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            font-family: 'Abril Fatface', serif;
+            flex-direction: row;
+        }
+
+        .section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 2rem; /* Değiştirilmiş değer */
+            position: relative;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .section:nth-child(1) {
+            flex: 1;
+        }
+
+        .section:nth-child(2) {
+            flex: 3;
+        }
+
+        .section img {
+            height: 40rem; /* Değiştirilmiş değer */
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+
+        .section.loaded img {
+            opacity: 1;
+        }
+
+        .section:nth-child(1) {
+            background: #2F395A;
+        }
+
+        .section:nth-child(2) {
+            background: #79af9b;
+            text-align: center;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu a {
+            margin-bottom: 1.25rem; /* Değiştirilmiş değer */
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.3s ease;
+            text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.8); /* Değiştirilmiş değer */
+        }
+
+        .menu a:hover {
+            text-shadow: none;
+            color: #2F395A;
+        }
+
+        p {
+            text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.8); /* Değiştirilmiş değer */
+            margin: 1rem 0; /* Değiştirilmiş değer */
+        }
+
+        .menu button.custom-button {
+            width: 200px;
+            font-size: 20px;
+            font-family: Calibri, serif;
+            font-style: italic;
+            display: block;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #2F395A;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .menu button.custom-button:hover {
+            background-color: #fff;
+            color: #2F395A;
+        }
+
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #2F395A;
+            color: #fff;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .table tbody tr:hover {
+            background-color: #ddd;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #2F395A;
+            color: #fff;
+            border: 1px solid #2F395A;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            color: #2F395A;
+        }
+
+        /* Add this CSS code to your existing styles */
+
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            background-color: #2F395A;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn-primary:hover {
+            background-color: #fff;
+            color: #2F395A;
+        }
+
+        .custom-select {
+            width: 100%; /* Adjust the width as needed */
+            padding: 8px;
+            font-size: 14px; /* Adjust the font size as needed */
+            border: transparent;
+        }
+
+
+        @media screen and (max-width: 600px) {
+            body {
+                flex-direction: column;
+            }
+
+            .section img {
+                height: 40rem;
+            }
+
+            html {
+                font-size: 0.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="section" id="section1">
+    <img th:src="@{../logo.png}" alt="Logo">
+</div>
+<div class="section">
+    <h2 style="color: #2F395A">Welcome to the HR dashboard.</h2>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+                <h1 class="text-center"> Create New Job </h1>
+                <div class="card-body">
+                    <form th:action="@{/jobs}" th:object="${job}" method="POST">
+                        <div class="form-group">
+
+                            <input
+                                    type="text"
+                                    name="jobName"
+                                    th:field="*{jobName}"
+                                    class="form-control"
+                                    placeholder="Enter Job First Name"
+                                    required
+                            />
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    window.onload = function () {
+        var section1 = document.getElementById('section1');
+        section1.classList.add('loaded');
+    };
+</script>
+</body>
+</html>

@@ -8,11 +8,13 @@ public interface EmployeeService {
 
     List<Employee> getAllEmployees();
 
-    void addEmployee(Employee employee);
+    void create_employee(Employee employee);
 
     void updateEmployee(Employee employee);
 
-    void deleteEmployee(Long employeeId);
+    void delete_employee(Long employeeId);
 
     Employee getEmployeeById(Long employeeId);
+
+    Employee findByUsernameAndPassword(String username, String password);
 }

@@ -66,18 +66,4 @@ public class HtmlController {
     }
 
 
-    @GetMapping("/employees/updateemployee")
-    public String showUpdateEmployeePage() {
-        return "/employees/updateemployee";
-    }
-
-    @GetMapping("/employees/deleteemployee")
-    public String showDeleteEmployeePage() {
-        return "/employees/deleteemployee";
-    }
-
-    @GetMapping("/employees/showemployee")
-    public String showShowEmployeePage() {
-        return "/employees/showemployee";
-    }
 }

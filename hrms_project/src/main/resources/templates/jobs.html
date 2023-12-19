@@ -29,7 +29,7 @@
             justify-content: center;
             align-items: center;
             color: #fff;
-            font-size: 3rem; /* Değiştirilmiş değer */
+            font-size: 2rem; /* Değiştirilmiş değer */
             position: relative;
             flex-direction: column;
             width: 100%;
@@ -87,38 +87,60 @@
             margin: 1rem 0; /* Değiştirilmiş değer */
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.8);
-        }
-
-        label {
-            margin-bottom: 2rem; /* Değiştirilmiş değer: Label'ın altındaki boşluğu iki katına çıkardık */
-            font-size: 3rem; /* Değiştirilmiş değer: Yazı boyutunu iki katına çıkardık */
-        }
-
-        input {
-            padding: 1rem; /* Değiştirilmiş değer: Yazı yerini genişlettik */
-            width: 160%;
-            font-size: 2.4rem; /* Değiştirilmiş değer: Yazı boyutunu iki katına çıkardık */
-            margin-bottom: 3rem; /* Değiştirilmiş değer: Boşlukları iki katına çıkardık */
-            border: 1px solid transparent; /* Değiştirilmiş değer: Sınır kalınlığını iki katına çıkardık */
-            border-radius: 0.5rem;
-        }
-
-
-        input[type="submit"] {
+        .menu button.custom-button {
+            width: 200px;
+            font-size: 20px;
+            font-family: Calibri, serif;
+            font-style: italic;
+            display: block;
+            padding: 10px;
+            margin-top: 20px;
             background-color: #2F395A;
             color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            padding: 1rem 2rem; /* Buton boyutunu genişlettik */
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        input[type="submit"]:hover {
-            background-color: #1c2338;
+        .menu button.custom-button:hover {
+            background-color: #fff;
+            color: #2F395A;
+        }
+        .table {
+            width: 90%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #2F395A;
+            color: #fff;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #2F395A;
+            color: #fff;
+            border: 1px solid #2F395A;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            color: #2F395A;
         }
 
 
@@ -142,19 +164,39 @@
     <img th:src="@{../logo.png}" alt="Logo">
 </div>
 <div class="section">
-    <div class="menu">
-        <a href="/index" style="color: #2F395A;text-shadow: none; font-size: 35px">-> Go to Main Menu <-</a>
+    <h2 style="color: #2F395A">Welcome to the HR dashboard.</h2>
+
+
+    <div class="row">
+        <div class="col-lg-3">
+            <a th:href="@{/jobs/create_job}" class="btn btn-primary btn-sm mb-3"> Add Job</a>
+            <a href="/index" class="btn btn-primary btn-sm mb-3"> Log Out</a>
+        </div>
     </div>
 
-    <form action="/login/asmanager" method="post" style="margin-top: 2rem; text-align: center;">
-        <label for="username">Manager Username :</label>
-        <input type="text" id="username" name="username" required>
+    <table class="table table-striped table-bordered" style="font-family: Arial, Helvetica, sans-serif;">
+        <thead class="table-dark">
+        <tr>
+            <th> Job ID</th>
+            <th> Job Name</th>
+            <th> Actions</th>
+        </tr>
+        </thead>
 
-        <label for="password">Manager Password :</label>
-        <input type="password" id="password" name="password" required>
+        <tbody>
+        <!-- Thymeleaf ile döngü eklenmiş -->
+        <tr th:each="job: ${jobs}">
+            <td th:text="*{job.jobId}"></td>
+            <td th:text="*{job.jobName}"></td>
+            <td>
+                <!-- Thymeleaf ile URL oluşturma eklenmiş -->
+                <a th:href="@{/jobs/edit/{id}(id=${job.jobId})}" class="btn btn-primary">Update</a>
+                <a th:href="@{/jobs/{id}(id=${job.jobId})}" class="btn btn-danger" style="margin-top: 5px">Delete</a>
+            </td>
+        </tr>
+        </tbody>
 
-        <input type="submit" value="Log In">
-    </form>
+    </table>
 
 </div>
 
@@ -166,3 +208,4 @@
 </script>
 </body>
 </html>
+

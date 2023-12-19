@@ -1,13 +1,11 @@
     package bdu.cs.is.hrms_project.model;
 
-    import bdu.cs.is.hrms_project.enums.JobEnum;
-    import bdu.cs.is.hrms_project.enums.SexEnum;
     import jakarta.persistence.*;
     import lombok.AllArgsConstructor;
     import lombok.Data;
     import lombok.NoArgsConstructor;
 
-    import java.util.Date;
+    import java.time.LocalDate;
 
     @Data
     @AllArgsConstructor
@@ -27,7 +25,7 @@
         private String lastName;
 
         @Column(name = "birthday", nullable = false)
-        private Date birthday;
+        private LocalDate birthday;
 
         @Column(name = "gender", nullable = false)
         private String gender;
